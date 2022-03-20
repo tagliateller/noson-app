@@ -79,6 +79,11 @@ jobs:
                     -Wno-dev"
       - name: Build
         run:  cmake --build build
+      - name: upload apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: apk
+          path: build/noson-gui-arm64-v8a/build/outputs/apk/debug/noson-gui-arm64-v8a-debug.apk
 
   release:
     name: Release APK
@@ -94,7 +99,7 @@ jobs:
       - name: Download APK from build
         uses: actions/download-artifact@v1
         with:
-          name:   build/noson-gui-arm64-v8a/build/outputs/apk/debug/noson-gui-arm64-v8a-debug.apk
+          name: apk
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
