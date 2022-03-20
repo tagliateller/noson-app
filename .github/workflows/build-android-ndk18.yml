@@ -94,7 +94,7 @@ jobs:
       - name: Download APK from build
         uses: actions/download-artifact@v1
         with:
-          name: apk  # /home/runner/work/noson-app/noson-app/build/noson-gui-arm64-v8a//build/outputs/apk/debug/noson-gui-arm64-v8a-debug.apk
+          name:   build/noson-gui-arm64-v8a/build/outputs/apk/debug/noson-gui-arm64-v8a-debug.apk
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
