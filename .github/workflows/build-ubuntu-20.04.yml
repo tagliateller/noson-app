@@ -32,3 +32,39 @@ jobs:
                     -Wno-dev"
       - name: Build
         run:  cmake --build build
+
+  release:
+    name: Release Linux Package
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Time
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          timeZone: 1
+          format: 'YYYY-MM-DD-HH-mm-ss'    
+      - name: Download APK from build
+        uses: actions/download-artifact@v1
+        with:
+          name: apk
+      - name: list directory output
+        run: ls /home/runner/work/noson-app/noson-app/apk
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        with:
+          tag_name: ${{ steps.time.outputs.time }}
+          release_name: Release Ubuntu 20.04 Package ${{ steps.time.outputs.time }} 
+      - name: Upload Release APK
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: /home/runner/work/noson-app/noson-app/apk/noson-gui-arm64-v8a-debug.apk
+          asset_name: noson-gui-arm64-v8a-debug.apk # noson-gui-arm64-v8a-debug.apk
+          asset_content_type: application/zip

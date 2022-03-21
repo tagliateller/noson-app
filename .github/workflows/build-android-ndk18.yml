@@ -1,4 +1,4 @@
-name: build android ndk18
+name: Build APK mit NDK 18
 
 on:
   pull_request:
@@ -109,7 +109,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         with:
           tag_name: ${{ steps.time.outputs.time }}
-          release_name: Release ${{ steps.time.outputs.time }} 
+          release_name: Release NDK18 ${{ steps.time.outputs.time }} 
       - name: Upload Release APK
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
