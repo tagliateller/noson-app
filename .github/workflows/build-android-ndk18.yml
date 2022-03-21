@@ -115,6 +115,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: apk
+          asset_path: /home/runner/work/noson-app/noson-app/apk
           asset_name: noson-gui-arm64-v8a-debug.apk
           asset_content_type: application/zip
